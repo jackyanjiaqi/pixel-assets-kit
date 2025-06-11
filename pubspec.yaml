@@ -1,7 +1,8 @@
 name: pixel_assets_kit
 description: "Split-Screen Game Develop ToolKit"
 version: 0.1.0
-homepage:
+homepage: https://ketchupui.github.io
+repository: https://github.com/jackyanjiaqi/pixel-assets-kit
 
 environment:
   sdk: ^3.6.0

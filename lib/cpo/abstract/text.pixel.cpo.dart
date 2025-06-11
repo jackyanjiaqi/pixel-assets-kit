@@ -1,16 +1,15 @@
-import 'package:flutter/widgets.dart';
-
 import 'pixel.cpo.dart';
 import '../../model.dart';
 import '../../utils.dart';
 
+// ignore: non_constant_identifier_names
 final DEFAULT_LINE_PIXEL_NUM = 13;
 
 abstract class TextPixel extends PixelCPO{
   
   final String lnString;
 
-  double? _lineHeight;
+  final double? _lineHeight;
   
   TextPixel(this.lnString, {
     PixelInlineAlign textAlign = PixelInlineAlign.left, 
@@ -29,7 +28,7 @@ abstract class TextPixel extends PixelCPO{
   double get lineHeight => _lineHeight ?? (scaledPixelSize.height * linePixelNum);
 
   @override
-  double get pixelSize => _lineHeight != null ? (_lineHeight! / linePixelNum) : super.pixelSize;
+  double get pixelSize => _lineHeight != null ? (_lineHeight / linePixelNum) : super.pixelSize;
 }
 
 abstract class WordWrapTextPixel extends TextPixel{
