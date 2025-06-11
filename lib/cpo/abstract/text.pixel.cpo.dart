@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import 'pixel.cpo.dart';
 import '../../model.dart';
 import '../../utils.dart';
@@ -49,8 +51,13 @@ abstract class WordWrapTextPixel extends TextPixel{
     super.color}): 
     assert(columnConstraints.isNotEmpty), 
     assert(pixelSize != null || lineHeight != null || scaledPixelSize != null);
-
   
   @override
   (int, Pixel) get textPixelInfo => finalWordWrapPixel(lnString.split('\n'), columnConstraints, pixelSize);
+
+  // Widget toLayoutWidget(){
+  //   return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints){
+  //     return CustomPaint()
+  //   });
+  // }
 }

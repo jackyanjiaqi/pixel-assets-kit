@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'abstract/text.pixel.cpo.dart';
@@ -128,9 +127,33 @@ class CircleWWTextPixel extends WordWrapTextPixel with CircleTextPixelPainter{
     super.color, 
     super.paintRect, 
     super.paintRectAnchor});
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
 } 
 
-class CircleWWTextPixelWidget extends LeafRenderObjectWidget {
+class CircleWWTextPixelWidget extends StatelessWidget{
+
+  final String lnString;
+  final double? pixelSize;
+  final double? lineHeight;
+  final Size? scaledPixelSize;
+  final Color? color;
+  const CircleWWTextPixelWidget(this.lnString, {super.key, this.pixelSize, this.lineHeight, this.scaledPixelSize, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints){
+      return CustomPaint(size:Size.fromWidth(constraints.biggest.width), 
+        painter: CircleWWTextPixel(lnString, columnConstraints: [constraints.biggest.width], pixelSize: pixelSize, lineHeight: lineHeight, scaledPixelSize: scaledPixelSize, color: color),);
+    });
+  }
+  
+}
+
+class CircleWWTextPixelRWidget extends LeafRenderObjectWidget {
   final List<double>? columnConstraints;
   final String lnString;
   final double? pixelSize;
@@ -138,7 +161,7 @@ class CircleWWTextPixelWidget extends LeafRenderObjectWidget {
   final Size? scaledPixelSize;
   final Rect? paintRect;
   final Color? color;
-  const CircleWWTextPixelWidget(this.lnString, {super.key, this.pixelSize, this.lineHeight, this.scaledPixelSize, this.paintRect, this.columnConstraints, this.color});
+  const CircleWWTextPixelRWidget(this.lnString, {super.key, this.pixelSize, this.lineHeight, this.scaledPixelSize, this.paintRect, this.columnConstraints, this.color});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
