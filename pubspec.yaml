@@ -11,8 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  ketchup_ui: "^0.1.0"
-    # path: ../ketchupui
+  ketchup_ui: 
+    # ^0.1.0
+    path: ../ketchupui
 
 dev_dependencies:
   flutter_test:
