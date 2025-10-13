@@ -6,48 +6,54 @@ import 'model.dart';
 import 'assets/numbers.small.pixel.dart';
 import 'assets/numbers.time.pixel.dart';
 
+PixelImage characterPixelImage(String char, [bool hasLetter = false]){
+  return switch(char){
+        '0'=>hasLetter ? Slim8Number0 : DT16Number0,
+        '1'=>hasLetter ? Slim8Number1 : DT16Number1,
+        '2'=>hasLetter ? Slim8Number2 : DT16Number2,
+        '3'=>hasLetter ? Slim8Number3 : DT16Number3,
+        '4'=>hasLetter ? Slim8Number4 : DT16Number4,
+        '5'=>hasLetter ? Slim8Number5 : DT16Number5,
+        '6'=>hasLetter ? Slim8Number6 : DT16Number6,
+        '7'=>hasLetter ? Slim8Number7 : DT16Number7,
+        '8'=>hasLetter ? Slim8Number8 : DT16Number8,
+        '9'=>hasLetter ? Slim8Number9 : DT16Number9,
+        // '6'=>SlimNumber6,'7'=>SlimNumber7,'8'=>SlimNumber8,'9'=>SlimNumber9,
+        'K'=>K16,'U'=>U16,'I'=>I12, 'A'=>A12, 'P'=>P16, 'R'=>R16,
+        'O'=>O16, 'D'=>D16, 'B'=>B14, 'S'=>S16, 'G'=>G16, 'E'=>E16, 'V'=>V16, 'Y'=> Y16, 'J'=>J14, 'Q'=>Q16,
+        'a'=>a14, 'o'=>o12, 'b'=>b12, 'd'=>d12, 'm'=>m14, 'r'=>r6, 'y'=>y12, 'j'=>j10, 'q'=>q12,
+        'e'=>e12, 'u'=>u12, 't'=>t10, 'c'=>c12, 'h'=>h12, 'p'=>p12, 'v'=>v10,
+        'i'=>i6, 'x'=>x12, 'l'=>l6, 's'=>s12, 'k'=>k12, 'w' => w14,
+        'Z'=>Z16, 'z'=>z10, 'X' => X16, 'W' => W16,
+        'L'=>L10, 'C'=>C16, 'n'=>n12, 'g'=>g10, 'f'=>f10, 'F'=>F16, 'H'=>H16,'T'=>T16, 'M'=>M16, 'N'=>N16,
+        ':'=>hasLetter ? Colon6 : DT16Colon, 
+        ','=>hasLetter ? Comma6 : DT16Comma, 
+        '.'=>hasLetter ? Dot6 : DT16Dot,
+        '-'=>hasLetter ? Hyphen6 : DT16Hyphen, '—'=>Dash6, '_'=>Underline6,
+        '('=>OpenParenthesis6, '['=>OpenBracket6, '{'=>OpenCurlyBracket6,
+        ')'=>CloseParenthesis6,  ']'=>CloseBracket6,  '}'=>CloseCurlyBracket6,
+        ' '=>Blank6,
+        //// 上标数字
+        '⁰'=>Sup6Number0, '¹'=>Sup6Number1, '²'=>Sup6Number2, '³'=>Sup6Number3, 
+        '⁴'=>Sup6Number4, '⁵'=>Sup6Number5, '⁶'=>Sup6Number6, '⁷'=>Sup6Number7, 
+        '⁸'=>Sup6Number8, '⁹'=>Sup6Number9, 
+        //// 下标数字
+        '₀'=>Sub6Number0, '₁'=>Sub6Number1, '₂'=>Sub6Number2, '₃'=>Sub6Number3, 
+        '₄'=>Sub6Number4, '₅'=>Sub6Number5, '₆'=>Sub6Number6, '₇'=>Sub6Number7, 
+        '₈'=>Sub6Number8, '₉'=>Sub6Number9, 
+        
+        _=>Unknown16
+      };
+}
+
+bool hasUnknownChars(String target) => target.split('').any((char)=>characterPixelImage(char) == Unknown16);
+
 List<Pixel> characterPixels(String target){
   if(target.isEmpty) return [Pixel.empty()];
   bool hasLetter = target.contains(RegExp(r'[a-zA-Z]'));
   return target.split('').map<Pixel>((char){
-      return switch(char){
-        '0'=>hasLetter ? Slim8Number0.pixel : DT16Number0.pixel,
-        '1'=>hasLetter ? Slim8Number1.pixel : DT16Number1.pixel,
-        '2'=>hasLetter ? Slim8Number2.pixel : DT16Number2.pixel,
-        '3'=>hasLetter ? Slim8Number3.pixel : DT16Number3.pixel,
-        '4'=>hasLetter ? Slim8Number4.pixel : DT16Number4.pixel,
-        '5'=>hasLetter ? Slim8Number5.pixel : DT16Number5.pixel,
-        '6'=>hasLetter ? Slim8Number6.pixel : DT16Number6.pixel,
-        '7'=>hasLetter ? Slim8Number7.pixel : DT16Number7.pixel,
-        '8'=>hasLetter ? Slim8Number8.pixel : DT16Number8.pixel,
-        '9'=>hasLetter ? Slim8Number9.pixel : DT16Number9.pixel,
-        // '6'=>SlimNumber6.pixel,'7'=>SlimNumber7.pixel,'8'=>SlimNumber8.pixel,'9'=>SlimNumber9.pixel,
-        'K'=>K16.pixel,'U'=>U16.pixel,'I'=>I12.pixel, 'A'=>A12.pixel, 'P'=>P16.pixel, 'R'=>R16.pixel,
-        'O'=>O16.pixel, 'D'=>D16.pixel, 'B'=>B14.pixel, 'S'=>S16.pixel, 'G'=>G16.pixel, 'E'=>E16.pixel, 'V'=>V16.pixel, 'Y'=> Y16.pixel, 'J'=>J14.pixel, 'Q'=>Q16.pixel,
-        'a'=>a14.pixel, 'o'=>o12.pixel, 'b'=>b12.pixel, 'd'=>d12.pixel, 'm'=>m14.pixel, 'r'=>r6.pixel, 'y'=>y12.pixel, 'j'=>j10.pixel, 'q'=>q12.pixel,
-        'e'=>e12.pixel, 'u'=>u12.pixel, 't'=>t10.pixel, 'c'=>c12.pixel, 'h'=>h12.pixel, 'p'=>p12.pixel, 'v'=>v10.pixel,
-        'i'=>i6.pixel, 'x'=>x12.pixel, 'l'=>l6.pixel, 's'=>s12.pixel, 'k'=>k12.pixel, 'w' => w14.pixel,
-        'Z'=>Z16.pixel, 'z'=>z10.pixel, 'X' => X16.pixel, 'W' => W16.pixel,
-        'L'=>L10.pixel, 'C'=>C16.pixel, 'n'=>n12.pixel, 'g'=>g10.pixel, 'f'=>f10.pixel, 'F'=>F16.pixel, 'H'=>H16.pixel,'T'=>T16.pixel, 'M'=>M16.pixel, 'N'=>N16.pixel,
-        ':'=>hasLetter ? Colon6.pixel : DT16Colon.pixel, 
-        ','=>hasLetter ? Comma6.pixel : DT16Comma.pixel, 
-        '.'=>hasLetter ? Dot6.pixel : DT16Dot.pixel,
-        '-'=>hasLetter ? Hyphen6.pixel : DT16Hyphen.pixel, '—'=>Dash6.pixel, '_'=>Underline6.pixel,
-        '('=>OpenParenthesis6.pixel, '['=>OpenBracket6.pixel, '{'=>OpenCurlyBracket6.pixel,
-        ')'=>CloseParenthesis6.pixel,  ']'=>CloseBracket6.pixel,  '}'=>CloseCurlyBracket6.pixel,
-        ' '=>Blank6.pixel,
-        //// 上标数字
-        '⁰'=>Sup6Number0.pixel, '¹'=>Sup6Number1.pixel, '²'=>Sup6Number2.pixel, '³'=>Sup6Number3.pixel, 
-        '⁴'=>Sup6Number4.pixel, '⁵'=>Sup6Number5.pixel, '⁶'=>Sup6Number6.pixel, '⁷'=>Sup6Number7.pixel, 
-        '⁸'=>Sup6Number8.pixel, '⁹'=>Sup6Number9.pixel, 
-        //// 下标数字
-        '₀'=>Sub6Number0.pixel, '₁'=>Sub6Number1.pixel, '₂'=>Sub6Number2.pixel, '₃'=>Sub6Number3.pixel, 
-        '₄'=>Sub6Number4.pixel, '₅'=>Sub6Number5.pixel, '₆'=>Sub6Number6.pixel, '₇'=>Sub6Number7.pixel, 
-        '₈'=>Sub6Number8.pixel, '₉'=>Sub6Number9.pixel, 
-        
-        _=>Unknown16.pixel
-      };
-    }).toList();
+      return characterPixelImage(char, hasLetter).pixel;
+  }).toList();
 }
 
 Pixel combinePixels(List<Pixel> pixels, {PixelCombineMode combineMode = PixelCombineMode.LR, Offset? offset}){

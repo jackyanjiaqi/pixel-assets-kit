@@ -1,3 +1,5 @@
+import 'package:equatable/equatable.dart';
+
 //// 像素连接种类
 enum PixelCombineMode {
   LR, TB, RL, BT,
@@ -31,7 +33,7 @@ class Pixel{
   }
 }
 
-class PixelImage{
+class PixelImage extends Equatable{
   final String data;
   const PixelImage(this.data);
   
@@ -45,4 +47,8 @@ class PixelImage{
   }
 
   Pixel get pixel => pixelRepeat(1);
+  
+  @override
+  List<Object?> get props => [data];
+  
 }
